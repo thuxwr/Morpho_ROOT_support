@@ -106,6 +106,16 @@ If the type of variable in user-defined function is **int**, it is not necessary
 ```
 If one wants to use a self-defined function with multiple real variables, he or she may refer to https://github.com/stan-dev/math/wiki/Adding-a-new-function-with-known-gradients.
 
+It is noted that a template typename can be adopted to calculate the first derivative automatically. To do so, the **header_name.hpp** should be:
+```c++
+    template <typename T>
+    typename boost::math::tools::promote_args<T>::type
+    your_function(const T& variable, std::ostream* pstream) {
+      return some_value;
+    }
+```
+You can find such a header in the example provided below.
+
 # Configure external functions in Morpho
 There are several new parameters provided in Morpho config files, which are:
 ```python
